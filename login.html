@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Medication & Prescription Tracker</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #000000;
+        color: #00ff99;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    #splash {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .container {
+        width: 500px;
+        margin: 40px auto;
+        padding: 25px;
+        border: 2px solid #00ff99;
+        border-radius: 10px;
+        display: none;
+    }
+
+    input, select {
+        width: 95%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #2e5a47;
+        background: #1b2b26;
+        color: #d2e8dd;
+        border-radius: 5px;
+    }
+
+    button {
+        width: 97%;
+        padding: 12px;
+        background: #00ff99;
+        color: black;
+        border: none;
+        margin-top: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .hidden { display: none; }
+    a { color: #00ff99; cursor: pointer; margin-top: 10px; display: block; }
+
+ 
+    .menu-option {
+        background: #0c1a16;
+        color: #b5c8bf;
+        padding: 20px;
+        margin: 12px 20px;
+        border-radius: 12px;
+        font-size: 20px;
+        border: 1px solid #2e5a47;
+    }
+
+ 
+    #bottomNav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #111;
+        border-top: 2px solid #00ff99;
+        padding: 10px 0;
+        display: none;
+        justify-content: space-around;
+    }
+
+    #bottomNav button {
+        background: transparent;
+        border: none;
+        color: #00ff99;
+        font-size: 16px;
+    }
+
+    .page {
+        display: none;
+        padding-bottom: 100px;
+    }
+
+ 
+    .pres-item {
+        background: #0c1a16;
+        border: 1px solid #2e5a47;
+        padding: 15px;
+        margin: 12px 20px;
+        border-radius: 12px;
+        font-size: 16px;
+        text-align: left;
+    }
+</style>
+</head>
+
+<body>
+
+
+<div id="splash">Online Medication & Prescription Tracker</div>
+
+
+<div class="container" id="loginBox">
+    <h1>Login</h1>
+    <input type="text" id="loginName" placeholder="Full Name">
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+
+    <select id="loginRole" onchange="showRoleFields()">
+        <option value="none">Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+        <option value="pharmacist">Pharmacist</option>
+    </select>
+
+    <input type="text" id="patientLogin" class="hidden" placeholder="Enter Patient ID">
+    <input type="text" id="doctorLogin1" class="hidden" placeholder="Enter License Number">
+    <input type="text" id="doctorLogin2" class="hidden" placeholder="Enter Specialization">
+    <input type="text" id="pharmaLogin" class="hidden" placeholder="Pharmacist License Number">
+
+    <button onclick="loginUser()">Login</button>
+    <a onclick="openSignup()">Don't have an account? Create one</a>
+</div>
+
+
+<div class="container" id="signupBox">
+    <h1>Sign Up</h1>
+    <input type="text" id="signupName" placeholder="Full Name">
+    <input type="email" id="signupEmail" placeholder="Email">
+    <input type="password" id="signupPassword" placeholder="Password">
+
+    <select id="signupRole" onchange="showSignupFields()">
+        <option value="none">Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+        <option value="pharmacist">Pharmacist</option>
+    </select>
+
+    <input type="text" id="patientSignup1" class="hidden" placeholder="Health Issue Domain">
+    <input type="text" id="patientSignup2" class="hidden" placeholder="Auto-generated Patient ID">
+
+    <input type="text" id="doctorSignup1" class="hidden" placeholder="License Number">
+    <input type="text" id="doctorSignup2" class="hidden" placeholder="Specialization">
+
+    <input type="text" id="pharmaSignup" class="hidden" placeholder="Pharmacist License Details">
+    <input type="text" id="adminSignup" class="hidden" placeholder="Admin Code">
+
+    <button onclick="signupUser()">Sign Up</button>
+    <a onclick="openLogin()">Already have an account? Login</a>
+</div>
+
+
+<div class="page" id="dashboardPage">
+    <h2 style="margin-top:20px;">Dashboard</h2>
+
+    <div class="menu-option">Doctor</div>
+    <div class="menu-option">Patient</div>
+    <div class="menu-option">Pharmacist</div>
+    <div class="menu-option">Admin</div>
+</div>
+
+
+<div class="page" id="prescriptionPage">
+    <h2 style="text-align:left;margin-left:20px;">Active Prescriptions</h2>
+
+    <div class="pres-item">
+        <b>Antibiotic</b><br>
+        <span style="color:#b5c8bf;">Amoxicillin 500mg</span>
+    </div>
+
+    <div class="pres-item">
+        <b>Pain Relief</b><br>
+        <span style="color:#b5c8bf;">Ibuprofen 200mg</span>
+    </div>
+
+    <div class="pres-item">
+        <b>Blood Pressure</b><br>
+        <span style="color:#b5c8bf;">Lisinopril 10mg</span>
+    </div>
+
+    <h2 style="text-align:left;margin-left:20px;margin-top:30px;">Past Prescriptions</h2>
+
+    <div class="pres-item">
+        <b>Diabetes</b><br>
+        <span style="color:#b5c8bf;">Metformin 500mg</span>
+    </div>
+
+    <div class="pres-item">
+        <b>Cholesterol</b><br>
+        <span style="color:#b5c8bf;">Atorvastatin 20mg</span>
+    </div>
+</div>
+
+
+<div class="page" id="remainderPage">
+    <h2 style="margin-top:20px; margin-bottom:20px;">Medication Tracker</h2>
+
+    <input type="text" placeholder="Medication Name">
+    <input type="text" placeholder="Dosage (e.g., 200mg)">
+    
+    <select>
+        <option>Frequency</option>
+        <option>Once a Day</option>
+        <option>Twice a Day</option>
+        <option>Weekly</option>
+    </select>
+
+    <input type="time">
+
+    <select>
+        <option>Notification Type</option>
+        <option>Popup</option>
+        <option>Alarm</option>
+        <option>Vibration</option>
+    </select>
+
+    <button>Save Medication</button>
+</div>
+
+
+<div class="page" id="profilePage">
+    <h2 style="margin-top:20px;">Profile</h2>
+
+   
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+
+<div id="bottomNav">
+    <button onclick="showPage('dashboardPage')">Dashboard</button>
+    <button onclick="showPage('prescriptionPage')">Prescriptions</button>
+    <button onclick="showPage('remainderPage')">Reminders</button>
+    <button onclick="showPage('profilePage')">Profile</button>
+</div>
+
+<script>
+setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+    document.getElementById("loginBox").style.display = "block";
+}, 3000);
+
+function openLogin() {
+    signupBox.style.display = "none";
+    loginBox.style.display = "block";
+}
+
+function openSignup() {
+    loginBox.style.display = "none";
+    signupBox.style.display = "block";
+}
+
+function showRoleFields() {
+    let role = loginRole.value;
+    patientLogin.classList.add("hidden");
+    doctorLogin1.classList.add("hidden");
+    doctorLogin2.classList.add("hidden");
+    pharmaLogin.classList.add("hidden");
+
+    if(role === "patient") patientLogin.classList.remove("hidden");
+    if(role === "doctor") { doctorLogin1.classList.remove("hidden"); doctorLogin2.classList.remove("hidden"); }
+    if(role === "pharmacist") pharmaLogin.classList.remove("hidden");
+}
+
+function showSignupFields() {
+    let role = signupRole.value;
+
+    patientSignup1.classList.add("hidden");
+    patientSignup2.classList.add("hidden");
+    doctorSignup1.classList.add("hidden");
+    doctorSignup2.classList.add("hidden");
+    pharmaSignup.classList.add("hidden");
+    adminSignup.classList.add("hidden");
+
+    if(role === "patient") { patientSignup1.classList.remove("hidden"); patientSignup2.classList.remove("hidden"); }
+    if(role === "doctor") { doctorSignup1.classList.remove("hidden"); doctorSignup2.classList.remove("hidden"); }
+    if(role === "pharmacist") pharmaSignup.classList.remove("hidden");
+    if(role === "admin") adminSignup.classList.remove("hidden");
+}
+
+function loginUser() {
+    loginBox.style.display = "none";
+    bottomNav.style.display = "flex";
+    showPage('dashboardPage');
+}
+
+function signupUser() {
+    alert("Signup Successful! Please Login.");
+    openLogin();
+}
+
+function showPage(pageId) {
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById(pageId).style.display = "block";
+}
+
+function logout() {
+    location.reload();
+}
+</script>
+
+</body>
+</html>
