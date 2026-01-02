@@ -4,121 +4,97 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Online Medication & Prescription Tracker</title>
-
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: #000000;
-        color: #00ff99;
-        font-family: Arial, sans-serif;
-        text-align: center;
-    }
-
-    #splash {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 32px;
-        font-weight: bold;
-    }
-
-    .container {
-        width: 500px;
-        margin: 40px auto;
-        padding: 25px;
-        border: 2px solid #00ff99;
-        border-radius: 10px;
-        display: none;
-    }
-
-    input, select {
-        width: 95%;
-        padding: 12px;
-        margin: 10px 0;
-        border: 1px solid #2e5a47;
-        background: #1b2b26;
-        color: #d2e8dd;
-        border-radius: 5px;
-    }
-
-    button {
-        width: 97%;
-        padding: 12px;
-        background: #00ff99;
-        color: black;
-        border: none;
-        margin-top: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    .hidden { display: none; }
-    a { color: #00ff99; cursor: pointer; margin-top: 10px; display: block; }
-
- 
-    .menu-option {
-        background: #0c1a16;
-        color: #b5c8bf;
-        padding: 20px;
-        margin: 12px 20px;
-        border-radius: 12px;
-        font-size: 20px;
-        border: 1px solid #2e5a47;
-    }
-
- 
-    #bottomNav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #111;
-        border-top: 2px solid #00ff99;
-        padding: 10px 0;
-        display: none;
-        justify-content: space-around;
-    }
-
-    #bottomNav button {
-        background: transparent;
-        border: none;
-        color: #00ff99;
-        font-size: 16px;
-    }
-
-    .page {
-        display: none;
-        padding-bottom: 100px;
-    }
-
- 
-    .pres-item {
-        background: #0c1a16;
-        border: 1px solid #2e5a47;
-        padding: 15px;
-        margin: 12px 20px;
-        border-radius: 12px;
-        font-size: 16px;
-        text-align: left;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    color: #00ff99;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+#splash {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+}
+.container {
+    width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    border: 2px solid #00ff99;
+    border-radius: 10px;
+    display: none;
+}
+input, select {
+    width: 95%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #2e5a47;
+    background: #1b2b26;
+    color: #d2e8dd;
+    border-radius: 5px;
+}
+button {
+    width: 97%;
+    padding: 12px;
+    background: #00ff99;
+    color: black;
+    border: none;
+    margin-top: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.hidden { display: none; }
+a { color: #00ff99; cursor: pointer; display: block; margin-top: 10px; }
+.menu-option {
+    background: #0c1a16;
+    padding: 20px;
+    margin: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid #2e5a47;
+    cursor: pointer;
+}
+.page { display: none; padding-bottom: 100px; }
+.card {
+    background: #0c1a16;
+    border: 1px solid #2e5a47;
+    padding: 15px;
+    margin: 12px 20px;
+    border-radius: 12px;
+    text-align: left;
+}
+#bottomNav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    border-top: 2px solid #00ff99;
+    padding: 10px 0;
+    display: none;
+    justify-content: space-around;
+}
+#bottomNav button {
+    background: none;
+    border: none;
+    color: #00ff99;
+}
 </style>
 </head>
-
 <body>
-
-
 <div id="splash">Online Medication & Prescription Tracker</div>
 
 
 <div class="container" id="loginBox">
     <h1>Login</h1>
-    <input type="text" id="loginName" placeholder="Full Name">
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="password" id="loginPassword" placeholder="Password">
-
+    <input id="loginName" placeholder="Full Name">
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" placeholder="Password">
     <select id="loginRole" onchange="showRoleFields()">
         <option value="none">Select Role</option>
         <option value="admin">Admin</option>
@@ -126,12 +102,10 @@
         <option value="doctor">Doctor</option>
         <option value="pharmacist">Pharmacist</option>
     </select>
-
-    <input type="text" id="patientLogin" class="hidden" placeholder="Enter Patient ID">
-    <input type="text" id="doctorLogin1" class="hidden" placeholder="Enter License Number">
-    <input type="text" id="doctorLogin2" class="hidden" placeholder="Enter Specialization">
-    <input type="text" id="pharmaLogin" class="hidden" placeholder="Pharmacist License Number">
-
+    <input id="patientLogin" class="hidden" placeholder="Patient ID">
+    <input id="doctorLogin1" class="hidden" placeholder="License Number">
+    <input id="doctorLogin2" class="hidden" placeholder="Specialization">
+    <input id="pharmaLogin" class="hidden" placeholder="Pharmacist License">
     <button onclick="loginUser()">Login</button>
     <a onclick="openSignup()">Don't have an account? Create one</a>
 </div>
@@ -139,10 +113,9 @@
 
 <div class="container" id="signupBox">
     <h1>Sign Up</h1>
-    <input type="text" id="signupName" placeholder="Full Name">
-    <input type="email" id="signupEmail" placeholder="Email">
-    <input type="password" id="signupPassword" placeholder="Password">
-
+    <input id="signupName" placeholder="Full Name">
+    <input id="signupEmail" placeholder="Email">
+    <input id="signupPassword" placeholder="Password">
     <select id="signupRole" onchange="showSignupFields()">
         <option value="none">Select Role</option>
         <option value="admin">Admin</option>
@@ -150,95 +123,118 @@
         <option value="doctor">Doctor</option>
         <option value="pharmacist">Pharmacist</option>
     </select>
-
-    <input type="text" id="patientSignup1" class="hidden" placeholder="Health Issue Domain">
-    <input type="text" id="patientSignup2" class="hidden" placeholder="Auto-generated Patient ID">
-
-    <input type="text" id="doctorSignup1" class="hidden" placeholder="License Number">
-    <input type="text" id="doctorSignup2" class="hidden" placeholder="Specialization">
-
-    <input type="text" id="pharmaSignup" class="hidden" placeholder="Pharmacist License Details">
-    <input type="text" id="adminSignup" class="hidden" placeholder="Admin Code">
-
+  
+    <input id="patientSignup1" class="hidden" placeholder="Health Issue Domain">
+  
+    <input id="doctorSignup1" class="hidden" placeholder="License Number">
+    <input id="doctorSignup2" class="hidden" placeholder="Specialization">
+ 
+    <input id="pharmaSignup" class="hidden" placeholder="Pharmacist License">
+ 
+    <input id="adminSignup" class="hidden" placeholder="Admin Code">
     <button onclick="signupUser()">Sign Up</button>
     <a onclick="openLogin()">Already have an account? Login</a>
 </div>
 
 
 <div class="page" id="dashboardPage">
-    <h2 style="margin-top:20px;">Dashboard</h2>
+    <h2>Dashboard</h2>
+    <div class="menu-option" onclick="showPage('doctorMenuPage')">Doctor</div>
+    <div class="menu-option" onclick="showPage('patientPage')">Patient</div>
+    <div class="menu-option" onclick="showPage('pharmacistPage')">Pharmacist</div>
+    <div class="menu-option" onclick="showPage('adminPage')">Admin</div>
+</div>
 
-    <div class="menu-option">Doctor</div>
-    <div class="menu-option">Patient</div>
-    <div class="menu-option">Pharmacist</div>
-    <div class="menu-option">Admin</div>
+
+<div class="page" id="doctorMenuPage">
+    <h2>Doctor</h2>
+    <div class="menu-option" onclick="showPage('doctorAddPage')">Add Prescription</div>
+    <div class="menu-option" onclick="showDoctorView()">View / Edit Prescriptions</div>
+</div>
+
+
+<div class="page" id="doctorAddPage">
+    <h2>Add Prescription</h2>
+    <input id="docPatientId" placeholder="Patient ID">
+    <button onclick="addMedicationCard()">+ Add Medication</button>
+    <div id="medList"></div>
+    <button onclick="savePrescription()">Save Prescription</button>
+</div>
+
+<div class="page" id="doctorViewPage">
+    <h2>All Prescriptions</h2>
+    <div id="doctorPresList"></div>
+</div>
+
+<div class="page" id="patientPage">
+    <h2>Patient</h2>
+    <div class="menu-option" onclick="showPatientPrescriptions()"> View Prescriptions </div>
+    <div class="menu-option" onclick="openPatientAlarm()"> Set Alarm </div>
 </div>
 
 
 <div class="page" id="prescriptionPage">
-    <h2 style="text-align:left;margin-left:20px;">Active Prescriptions</h2>
-
-    <div class="pres-item">
-        <b>Antibiotic</b><br>
-        <span style="color:#b5c8bf;">Amoxicillin 500mg</span>
-    </div>
-
-    <div class="pres-item">
-        <b>Pain Relief</b><br>
-        <span style="color:#b5c8bf;">Ibuprofen 200mg</span>
-    </div>
-
-    <div class="pres-item">
-        <b>Blood Pressure</b><br>
-        <span style="color:#b5c8bf;">Lisinopril 10mg</span>
-    </div>
-
-    <h2 style="text-align:left;margin-left:20px;margin-top:30px;">Past Prescriptions</h2>
-
-    <div class="pres-item">
-        <b>Diabetes</b><br>
-        <span style="color:#b5c8bf;">Metformin 500mg</span>
-    </div>
-
-    <div class="pres-item">
-        <b>Cholesterol</b><br>
-        <span style="color:#b5c8bf;">Atorvastatin 20mg</span>
-    </div>
+    <h2>Prescriptions</h2>
+    <h3>Active Prescriptions</h3>
+    <div id="activePresList"></div>
+    <h3>Past Prescriptions</h3>
+    <div id="pastPresList"></div>
 </div>
 
 
 <div class="page" id="remainderPage">
-    <h2 style="margin-top:20px; margin-bottom:20px;">Medication Tracker</h2>
-
-    <input type="text" placeholder="Medication Name">
-    <input type="text" placeholder="Dosage (e.g., 200mg)">
-    
-    <select>
-        <option>Frequency</option>
-        <option>Once a Day</option>
-        <option>Twice a Day</option>
-        <option>Weekly</option>
+    <h2>Medication Reminder</h2>
+    <select id="remPrescription">
+        <option value="">Select Prescription</option>
     </select>
 
-    <input type="time">
-
-    <select>
-        <option>Notification Type</option>
-        <option>Popup</option>
-        <option>Alarm</option>
-        <option>Vibration</option>
+    <select id="remFrequency">
+        <option value="">Select Frequency</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
     </select>
-
-    <button>Save Medication</button>
+    <input type="time" id="remTime">
+    <input type="number" id="remDays" placeholder="Number of days">
+    <button onclick="setReminderAlarm()">Set Reminder</button>
+    <div id="remStatus"></div>
+    <div id="remAlarmBox" class="hidden">
+        <p id="remAlarmMsg"></p>
+        <button onclick="markTaken()">Taken</button>
+        <button onclick="markNotTaken()">Not Taken</button>
+    </div>
 </div>
 
-
 <div class="page" id="profilePage">
-    <h2 style="margin-top:20px;">Profile</h2>
-
-   
-
+    <h2>Profile</h2>
     <button onclick="logout()">Logout</button>
+</div>
+
+<div class="page" id="pharmacistPage">
+    <h2>Pharmacist</h2>
+
+    <div class="menu-option" onclick="showPage('updateStockPage')">
+        Update Stock
+    </div>
+
+    <div class="menu-option" onclick="showPage('viewStockPage')">
+        View Stock
+    </div>
+</div>
+
+<div class="page" id="updateStockPage">
+    <h2>Update Medicine Stock</h2>
+    <input id="stockMedName" placeholder="Medicine Name">
+    <input id="stockDosage" placeholder="Dosage">
+    <input id="stockExpiry" type="date" min="">
+
+    <input id="stockQuantity" type="number" placeholder="Stock Quantity">
+    <button onclick="addOrUpdateStock()">Add / Update Stock</button>
+</div>
+
+<div class="page" id="viewStockPage">
+    <h2>Available Medicine Stock</h2>
+    <div id="stockList"></div>
 </div>
 
 
@@ -249,70 +245,583 @@
     <button onclick="showPage('profilePage')">Profile</button>
 </div>
 
+<div class="page" id="patientAlarmPage">
+    <h2>Set Alarm</h2>
+    <select id="patientAlarmMed">
+        <option value="">Select Medicine</option>
+    </select>
+    <input type="time" id="patientAlarmTime">
+    <button onclick="setPatientAlarm()">Set Alarm</button>
+    <div id="patientAlarmStatus"></div>
+</div>
+
+
+<div class="page" id="adminPage">
+    <h2>Admin</h2>
+    <div class="menu-option" onclick="showDoctorActivities()"> View Doctor Activities </div>
+    <div class="menu-option" onclick="showPatientActivities()"> View Patient Activities </div>
+    <div class="menu-option" onclick="showPharmacistActivities()"> View Pharmacist Activities </div>
+    <div id="adminActivityView"></div>
+</div>
+
 <script>
-setTimeout(() => {
-    document.getElementById("splash").style.display = "none";
-    document.getElementById("loginBox").style.display = "block";
-}, 3000);
+let prescriptions = [];
+let pastPrescriptions = [];
+let editIndex = null;
+let doctorActivities = [];
+let patientActivities = [];
+let pharmacistActivities = [];
+let currentReminder = null;
 
-function openLogin() {
-    signupBox.style.display = "none";
-    loginBox.style.display = "block";
+
+
+let medicineStock = [];
+
+
+let currentUser = {
+    name: "",
+    email: "",
+    password: "",    
+    role: "",       
+    id: ""           
+};
+
+
+function isExpired(expiryDate) {
+    let today = new Date().toISOString().split("T")[0];
+    return expiryDate <= today;
 }
 
-function openSignup() {
-    loginBox.style.display = "none";
-    signupBox.style.display = "block";
+
+function loadReminderPrescriptions() {
+    remPrescription.innerHTML = `<option value="">Select Prescription</option>`;
+    prescriptions.forEach((p, index) => {
+        p.meds.forEach(m => {
+            let opt = document.createElement("option");
+            opt.value = index;
+            opt.text = `${m.name} | ${m.dose} | ${m.time}`;
+            remPrescription.appendChild(opt);
+        });
+    });
 }
 
-function showRoleFields() {
-    let role = loginRole.value;
+setTimeout(()=>{
+    splash.style.display="none";
+    loginBox.style.display="block";
+},3000);
+
+function openSignup(){ loginBox.style.display="none"; signupBox.style.display="block"; }
+function openLogin(){ signupBox.style.display="none"; loginBox.style.display="block"; }
+
+function showRoleFields(){
     patientLogin.classList.add("hidden");
     doctorLogin1.classList.add("hidden");
     doctorLogin2.classList.add("hidden");
     pharmaLogin.classList.add("hidden");
-
-    if(role === "patient") patientLogin.classList.remove("hidden");
-    if(role === "doctor") { doctorLogin1.classList.remove("hidden"); doctorLogin2.classList.remove("hidden"); }
-    if(role === "pharmacist") pharmaLogin.classList.remove("hidden");
+    if(loginRole.value==="patient") patientLogin.classList.remove("hidden");
+    if(loginRole.value==="doctor"){ doctorLogin1.classList.remove("hidden"); doctorLogin2.classList.remove("hidden"); }
+    if(loginRole.value==="pharmacist") pharmaLogin.classList.remove("hidden");
 }
 
-function showSignupFields() {
-    let role = signupRole.value;
-
+function showSignupFields(){
     patientSignup1.classList.add("hidden");
-    patientSignup2.classList.add("hidden");
     doctorSignup1.classList.add("hidden");
     doctorSignup2.classList.add("hidden");
     pharmaSignup.classList.add("hidden");
     adminSignup.classList.add("hidden");
-
-    if(role === "patient") { patientSignup1.classList.remove("hidden"); patientSignup2.classList.remove("hidden"); }
-    if(role === "doctor") { doctorSignup1.classList.remove("hidden"); doctorSignup2.classList.remove("hidden"); }
-    if(role === "pharmacist") pharmaSignup.classList.remove("hidden");
-    if(role === "admin") adminSignup.classList.remove("hidden");
+    if(signupRole.value==="patient"){ patientSignup1.classList.remove("hidden"); }
+    if(signupRole.value==="doctor"){ doctorSignup1.classList.remove("hidden"); doctorSignup2.classList.remove("hidden"); }
+    if(signupRole.value==="pharmacist"){ pharmaSignup.classList.remove("hidden"); }
+    if(signupRole.value==="admin"){ adminSignup.classList.remove("hidden"); }
 }
 
 function loginUser() {
+    let role = loginRole.value;
+    if (role === "none") {
+        alert("Please select role");
+        return;
+    }
+
+
+    currentUser.name = loginName.value;
+    currentUser.email = loginEmail.value;
+    currentUser.password = loginPassword.value; 
+    currentUser.role = role;
+
+
+    if (role === "admin") {
+        currentUser.id = ""; 
+        alert("Admin login successful");
+    }
+    else if (role === "patient") {
+        if (!patientLogin.value) {
+            alert("Enter Patient ID");
+            return;
+        }
+        currentUser.id = patientLogin.value;
+        alert("Patient login successful");
+    }
+    else if (role === "doctor") {
+        if (!doctorLogin1.value) { 
+            alert("Enter License Number");
+            return;
+        }
+        currentUser.id = doctorLogin1.value;
+        alert("Doctor login successful");
+    }
+    else if (role === "pharmacist") {
+        if (!pharmaLogin.value) {
+            alert("Enter Pharmacist License");
+            return;
+        }
+        currentUser.id = pharmaLogin.value;
+        alert("Pharmacist login successful");
+    }
+
     loginBox.style.display = "none";
     bottomNav.style.display = "flex";
-    showPage('dashboardPage');
+    showPage("dashboardPage");
 }
 
-function signupUser() {
-    alert("Signup Successful! Please Login.");
+
+
+function getNextPatientId(){
+    let count = localStorage.getItem("patientCount");
+    count = count ? parseInt(count) + 1 : 1;
+    localStorage.setItem("patientCount", count);
+    return "PAT" + count;
+}
+
+function signupUser(){
+    if(signupRole.value === "patient"){
+        let newPatientId = getNextPatientId();
+        alert("Signup Successful!\nYour Patient ID: " + newPatientId);
+    } else {
+        alert("Signup Successful!");
+    }
     openLogin();
 }
 
-function showPage(pageId) {
+
+function showPage(id){
     document.querySelectorAll(".page").forEach(p => p.style.display = "none");
-    document.getElementById(pageId).style.display = "block";
+    document.getElementById(id).style.display = "block";
+
+    if (id === "remainderPage") {
+        loadReminderPrescriptions();
+    }
+
+    if (id === "viewStockPage") {
+        showStock();
+    }
+
+
+    if (id === "doctorAddPage") {
+        medList.innerHTML = ""; 
+        addMedicationCard();   
+    }
 }
 
-function logout() {
-    location.reload();
+
+
+
+function addMedicationCard(data = {}) {
+    if (medicineStock.length === 0) {
+        alert(" No medicines available in pharmacy stock");
+        return;
+    }
+
+    let d = document.createElement("div");
+    d.className = "card";
+
+   
+
+
+   let options = medicineStock
+        .filter(m => m.qty > 0 && !isExpired(m.expiry))
+        .map(m => `
+            <option value="${m.name}">
+                ${m.name} (${m.dosage})
+            </option>
+        `)
+        .join("");
+
+   
+ 
+
+    d.innerHTML = `
+        <select class="medName">
+            <option value="">Select Medicine</option>
+            ${options}
+        </select>
+        <input class="medDose" placeholder="Dosage" value="${data.dose || ''}">
+        <input class="medDuration" placeholder="Duration" value="${data.duration || ''}">
+        <input class="medTime" placeholder="Timing" value="${data.time || ''}">
+        <button onclick="this.parentElement.remove()">Remove</button>
+    `;
+
+    medList.appendChild(d);
 }
+
+
+function savePrescription() {
+    if (!docPatientId.value) {
+        alert("Patient ID is required");
+        return;
+    }
+
+    let meds = [];
+    document.querySelectorAll("#medList .card").forEach(c => {
+        meds.push({
+            name: c.querySelector(".medName").value,
+            dose: c.querySelector(".medDose").value,
+            duration: parseInt(c.querySelector(".medDuration").value),
+            time: c.querySelector(".medTime").value
+        });
+    });
+
+    if (meds.length === 0) {
+        alert("Add at least one medicine");
+        return;
+    }
+
+
+    for (let med of meds) {
+        let stockItem = medicineStock.find(m => m.name === med.name);
+        if (!stockItem || stockItem.qty < med.duration) {
+            alert(` Not enough stock for ${med.name}`);
+            return;
+        }
+    }
+
+    let data = { pid: docPatientId.value, meds };
+
+    if (editIndex !== null) {
+        prescriptions[editIndex] = data;
+        doctorActivities.push("Doctor edited prescription for Patient ID: " + data.pid);
+        editIndex = null;
+        alert("Prescription Updated");
+
+    } else {
+        prescriptions.push(data);
+        doctorActivities.push("Doctor added prescription for Patient ID: " + data.pid);
+        alert("Prescription Saved");
+
+      
+        if (editIndex === null) {
+            meds.forEach(med => {
+                let stockItem = medicineStock.find(m => m.name === med.name);
+                stockItem.qty -= med.duration;
+
+                if (stockItem.qty < 50) {
+                    alert(` Low Stock Alert!\n${med.name} remaining: ${stockItem.qty}`);
+                }
+            });
+
+        }
+    }
+
+
+    updatePrescriptionTabs();
+    medList.innerHTML = "";
+    docPatientId.value = "";
+    showPage("doctorMenuPage");
+}
+
+
+
+function updatePrescriptionTabs(){
+    activePresList.innerHTML = "";
+    prescriptions.forEach(p => {
+        let html = `<div class="card"><b>Patient:</b> ${p.pid}<br>`;
+        p.meds.forEach(m => { html += `${m.name} | ${m.dose} | ${m.duration} | ${m.time}<br>`; });
+        html += `</div>`;
+        activePresList.innerHTML += html;
+    });
+
+    pastPresList.innerHTML = "";
+    pastPresList.innerHTML = "";
+    pastPrescriptions.forEach(pres => {
+        let html = `<div class="card"><b>Patient:</b> ${pres.pid}<br>`;
+        pres.meds.forEach(m => {
+            html += `${m.name} | ${m.dose} | ${m.duration} days | ${m.time}<br>`;
+        });
+        html += `</div>`;
+        pastPresList.innerHTML += html;
+    });
+
+}
+
+function showDoctorView(){
+    showPage("doctorViewPage");
+    doctorPresList.innerHTML = "";
+    prescriptions.forEach((p, i) => {
+        let html = `<div class="card"><b>Patient:</b> ${p.pid}<br><br>`;
+        p.meds.forEach(m => { html += `${m.name} | ${m.dose} | ${m.duration} | ${m.time}<br>`; });
+        html += `<br><button onclick="editPrescription(${i})">Edit</button></div>`;
+        doctorPresList.innerHTML += html;
+    });
+}
+
+function editPrescription(index){
+    editIndex = index;
+    let p = prescriptions[index];
+    docPatientId.value = p.pid;
+    medList.innerHTML = "";
+    p.meds.forEach(m => { addMedicationCard(m); });
+    showPage("doctorAddPage");
+}
+
+
+function showPatientPrescriptions() {
+    showPage("prescriptionPage");
+
+    activePresList.innerHTML = "";
+    pastPresList.innerHTML = "";
+
+    prescriptions
+        .filter(p => p.pid === currentUser.id)
+        .forEach(p => {
+            let html = `<div class="card"><b>Patient:</b> ${p.pid}<br>`;
+            p.meds.forEach(m => {
+                html += `${m.name} | ${m.dose} | ${m.duration} | ${m.time}<br>`;
+            });
+            html += `</div>`;
+            activePresList.innerHTML += html;
+        });
+
+    pastPrescriptions
+        .filter(p => p.pid === currentUser.id)
+        .forEach(p => {
+            let html = `<div class="card"><b>Patient:</b> ${p.pid}<br>`;
+            p.meds.forEach(m => {
+                html += `${m.name} | ${m.dose} | ${m.duration} | ${m.time}<br>`;
+            });
+            html += `</div>`;
+            pastPresList.innerHTML += html;
+        });
+}
+
+function openPatientAlarm(){ showPage("patientAlarmPage"); loadPatientAlarmMedicines(); }
+
+function loadPatientAlarmMedicines(){
+    patientAlarmMed.innerHTML = `<option value="">Select Medicine</option>`;
+    prescriptions.forEach(p => {
+        p.meds.forEach(m => {
+            let opt = document.createElement("option");
+            opt.value = m.time;
+            opt.text = m.name + " (Prescribed: " + m.time + ")";
+            patientAlarmMed.appendChild(opt);
+        });
+    });
+}
+
+function setPatientAlarm(){
+    let prescribedTime = patientAlarmMed.value;
+    let customTime = patientAlarmTime.value;
+    let finalTime = customTime || prescribedTime;
+    if(!finalTime){ alert("Please select medicine or time"); return; }
+
+    let now = new Date();
+    let alarm = new Date();
+    let [h, m] = finalTime.split(":");
+    alarm.setHours(h, m, 0);
+    if(alarm < now) alarm.setDate(alarm.getDate() + 1);
+
+    alert(" Alarm scheduled for:\n" + alarm.toLocaleString());
+    patientAlarmStatus.innerHTML = "Alarm set for " + finalTime;
+    patientActivities.push("Patient set alarm for " + finalTime);
+
+    setTimeout(() => { alert("⏰ Time to take your medicine!"); }, alarm - now);
+}
+
+
+function setReminderAlarm() {
+    let presIndex = remPrescription.value;
+    let days = parseInt(remDays.value);
+
+    if (presIndex === "" || !days) {
+        alert("Please select prescription and days");
+        return;
+    }
+
+    currentReminder = {
+        pid: prescriptions[presIndex].pid,
+        days: days,
+        taken: 0,
+        presIndex: parseInt(presIndex), 
+        medIndex: 0                     
+    };
+
+    let p = prescriptions[presIndex];
+    let med = p.meds[0];
+
+    remAlarmBox.classList.remove("hidden");
+    remAlarmMsg.innerHTML = `
+        <b>Medicine:</b> ${med.name}<br>
+        <b>Dosage:</b> ${med.dose}<br>
+        <b>Progress:</b> 0 / ${days}
+    `;
+
+    alert(" Reminder started");
+}
+
+
+    
+function markTaken() {
+    if (!currentReminder) return;
+
+    if (currentReminder.taken >= currentReminder.days) {
+        alert("Course already completed");
+        return;
+    }
+
+    currentReminder.taken++;
+
+    let p = prescriptions[currentReminder.presIndex];
+    let med = p.meds[currentReminder.medIndex];
+
+    remAlarmMsg.innerHTML = `
+        <b>Medicine:</b> ${med.name}<br>
+        <b>Dosage:</b> ${med.dose}<br>
+        <b>Progress:</b> ${currentReminder.taken} / ${currentReminder.days}
+    `;
+
+    patientActivities.push(`Taken ${med.name} (${currentReminder.taken}/${currentReminder.days})`);
+
+    if (currentReminder.taken === currentReminder.days) {
+        moveToPastPrescriptions();
+    }
+}
+
+
+
+
+
+
+function markNotTaken(){ alert("Medicine not taken today"); }
+
+
+function moveToPastPrescriptions() {
+    let index = currentReminder.presIndex;
+
+    let completed = prescriptions.splice(index, 1)[0];
+    pastPrescriptions.push(completed);
+
+    alert(" Prescription completed and moved to Past");
+
+  
+    currentReminder = null;
+    remAlarmBox.classList.add("hidden");
+
+   
+    remPrescription.value = "";
+    remFrequency.value = "";
+    remTime.value = "";
+    remDays.value = "";
+    remAlarmMsg.innerHTML = "";
+
+    updatePrescriptionTabs();
+    loadReminderPrescriptions();
+}
+
+
+
+
+
+function showDoctorActivities(){
+    adminActivityView.innerHTML = "<h3>Doctor Activities</h3>";
+    if(doctorActivities.length === 0){ adminActivityView.innerHTML += "No activity yet"; return; }
+    doctorActivities.forEach(a => { adminActivityView.innerHTML += `<div class="card">${a}</div>`; });
+}
+function showPatientActivities(){
+    adminActivityView.innerHTML = "<h3>Patient Activities</h3>";
+    if(patientActivities.length === 0){ adminActivityView.innerHTML += "No activity yet"; return; }
+    patientActivities.forEach(a => { adminActivityView.innerHTML += `<div class="card">${a}</div>`; });
+}
+function showPharmacistActivities(){
+    adminActivityView.innerHTML = "<h3>Pharmacist Activities</h3>";
+    if(pharmacistActivities.length === 0){ adminActivityView.innerHTML += "No activity yet"; return; }
+    pharmacistActivities.forEach(a => { adminActivityView.innerHTML += `<div class="card">${a}</div>`; });
+}
+
+
+function logout(){ location.reload(); }
+
+function addOrUpdateStock() {
+    let name = stockMedName.value.trim();
+    let dosage = stockDosage.value.trim();
+    let expiry = stockExpiry.value;
+    let qty = parseInt(stockQuantity.value);
+
+    if (!name || !dosage || !expiry || isNaN(qty) || qty <= 0) {
+        alert("Please fill all medicine details correctly");
+        return;
+    }
+
+    let today = new Date().toISOString().split("T")[0];
+    if (expiry <= today) {
+        alert(" Cannot add expired medicine");
+        return;
+    }
+
+    let stockItem = medicineStock.find(
+        m => m.name === name && m.dosage === dosage && m.expiry === expiry
+    );
+
+    if (stockItem) {
+        stockItem.qty += qty;
+    } else {
+        medicineStock.push({ name, dosage, expiry, qty });
+    }
+
+    stockMedName.value = "";
+    stockDosage.value = "";
+    stockExpiry.value = "";
+    stockQuantity.value = "";
+
+    alert(" Stock updated successfully");
+}
+
+
+
+
+function showStock() {
+    stockList.innerHTML = "";
+
+    if (medicineStock.length === 0) {
+        stockList.innerHTML = "No stock available";
+        return;
+    }
+
+    medicineStock.forEach(m => {
+        let expired = isExpired(m.expiry);
+        let warning = m.qty < 50 ? "  LOW STOCK" : "";
+        let expText = expired ? "  EXPIRED" : "";
+
+        stockList.innerHTML += `
+            <div class="card">
+                <b>${m.name}</b> (${m.dosage})<br>
+                Quantity: ${expired ? 0 : m.qty}<br>
+                Expiry: ${m.expiry}
+                ${warning}
+                ${expText}
+            </div>
+        `;
+    });
+}
+
+
+
+(function setMinExpiryDate() {
+    let today = new Date();
+    today.setDate(today.getDate() + 1); 
+    let minDate = today.toISOString().split("T")[0];
+    document.getElementById("stockExpiry").setAttribute("min", minDate);
+})();
+
+
+
 </script>
-
 </body>
 </html>
